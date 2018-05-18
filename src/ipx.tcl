@@ -24,16 +24,17 @@ set_property physical_name bram_we [ipx::get_port_maps WE -of_objects [ipx::get_
 ipx::add_port_map ADDR [ipx::get_bus_interfaces BRAM -of_objects [ipx::current_core]]
 set_property physical_name bram_addr [ipx::get_port_maps ADDR -of_objects [ipx::get_bus_interfaces BRAM -of_objects [ipx::current_core]]]
 
-
+ipx::add_bus_parameter MASTER_TYPE [ipx::get_bus_interfaces BRAM -of_objects [ipx::current_core]]
+set_property value BRAM_CTRL [ipx::get_bus_parameters MASTER_TYPE -of_objects [ipx::get_bus_interfaces BRAM -of_objects [ipx::current_core]]]
 
 ipx::add_bus_parameter ASSOCIATED_BUSIF [ipx::get_bus_interfaces bram_clk -of_objects [ipx::current_core]]
 set_property value BRAM [ipx::get_bus_parameters ASSOCIATED_BUSIF -of_objects [ipx::get_bus_interfaces bram_clk -of_objects [ipx::current_core]]]
 
 ipx::add_bus_parameter FREQ_HZ [ipx::get_bus_interfaces bram_clk -of_objects [ipx::current_core]]
 
-set_property core_revision 4 [ipx::current_core]
-set_property display_name chacha20_axi_v1_0 [ipx::current_core]
-set_property description chacha20_axi_v1_0 [ipx::current_core]
+set_property core_revision $core_revision [ipx::current_core]
+set_property display_name $project_name [ipx::current_core]
+set_property description $project_name [ipx::current_core]
 ipx::create_xgui_files [ipx::current_core]
 ipx::update_checksums [ipx::current_core]
 ipx::save_core [ipx::current_core]
